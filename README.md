@@ -1,3 +1,2 @@
-# go
-go语言练习代码
 # web-osLearn
+展示os项目的一个网站
