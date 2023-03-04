@@ -25,5 +25,7 @@ func NewProjectDAO() *ProjectDAO {
 }
 
 func QueryAllProject() ProjectList {
-
+	var projects ProjectList
+	DB.Find(&projects)
+	return projects
 }
