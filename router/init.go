@@ -1,10 +1,17 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"web-osLearn/handlers/project"
+	"web-osLearn/models"
+)
 
-func initRouter() *gin.Engine {
+func InitRouter() *gin.Engine {
+	models.InitDB()
+	fmt.Println(4)
 	r := gin.Default()
 	baseGroup := r.Group("/os")
-	baseGroup.GET("/project/")
+	baseGroup.GET("/project/", project.FeedProjectList)
 	return r
 }

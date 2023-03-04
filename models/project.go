@@ -4,6 +4,7 @@ import "sync"
 
 type ProjectList []*Project
 type Project struct {
+	Id          int    `json:"id" gorm:"primary"`
 	Name        string `json:"name"`
 	Author      string `json:"author"`
 	Url         string `json:"url"`
@@ -24,8 +25,13 @@ func NewProjectDAO() *ProjectDAO {
 	return projectDAO
 }
 
-func QueryAllProject() ProjectList {
+func (*ProjectDAO) QueryAllProject() (ProjectList, error) {
 	var projects ProjectList
-	DB.Find(&projects)
-	return projects
+	result := DB.Find(&projects)
+	return projects, result.Error
+}
+
+func (*ProjectDAO) AddProject(project Project) error {
+	result := DB.Create(&project)
+	return result.Error
 }
